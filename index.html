@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Form Validation</title>
+</head>
+<body>
+  <form onsubmit="return validateForm()">
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" name="firstName" required>
+    <br>
+
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" name="lastName" required>
+    <br>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+    <br>
+
+    <input type="submit" value="Check">
+  </form>
+
+  <script>
+    function validatePassword(password) {
+      
+      const hasUpperCase = /[A-Z]/.test(password);
+      const hasLowerCase = /[a-z]/.test(password);
+      const isValidLength = password.length >= 8;
+
+      return hasUpperCase && hasLowerCase && isValidLength;
+    }
+
+    function validateForm() {
+      const firstName = document.getElementById("firstName").value;
+      const lastName = document.getElementById("lastName").value;
+      const password = document.getElementById("password").value;
+
+      
+      if (!firstName || !lastName) {
+        alert("First name and last name are required!");
+        return false;
+      }
+
+      
+      if (!validatePassword(password)) {
+        alert("Invalid password! Password must have at least 8 characters, one uppercase letter, and one lowercase letter.");
+        return false;
+      }
+
+      alert("All fields are valid!");
+      return true;
+    }
+  </script>
+</body>
+</html>
